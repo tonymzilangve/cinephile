@@ -3,21 +3,13 @@ from pathlib import Path
 from dotenv import load_dotenv
 load_dotenv()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-pb%vki!)+6*drcxmfpu_@-03b&61%8r895=97w*h8b$_@3te+@'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
@@ -33,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'movies',
+    'movies_api',
 
     'rest_framework',
     'drf_yasg',
@@ -44,7 +37,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-
     'allauth.socialaccount.providers.google'
 ]
 
@@ -94,9 +86,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cinephile.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
     'default': {

@@ -149,6 +149,7 @@ class Critic(models.Model):
 
 class Review(models.Model):
     text = models.TextField(max_length=1000, verbose_name="Review")
+    critic = models.ForeignKey('Critic', on_delete=models.PROTECT, verbose_name="Critic")
 
     def __str__(self):
         return self.text
@@ -161,6 +162,7 @@ class Review(models.Model):
 
 class Comment(models.Model):
     text = models.TextField(max_length=1000, verbose_name="Comment")
+    author = models.ForeignKey('User', on_delete=models.PROTECT, verbose_name="Author")
 
     def __str__(self):
         return self.text

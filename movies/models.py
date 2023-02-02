@@ -29,7 +29,6 @@ class Movie(models.Model):
     studio = models.CharField(blank=True, null=True, verbose_name="Studio")
     country = models.CharField(max_length=50, choices=COUNTRIES, verbose_name="Country")
 
-
     def __str__(self):
         return self.name
 

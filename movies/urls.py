@@ -6,7 +6,7 @@ from cinephile import settings
 from movies.views import *
 
 urlpatterns = [
-    path('', FeedView.as_view(), name="feed"),
+    path('', FeedView.as_view(), name="feed")
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) +\
               static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -2,42 +2,28 @@ from django.contrib import admin
 from .models import *
 
 
-class MovieAadmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'genre', 'release_date', 'director', 'budget', 'box_office', 'country')
-    list_display_links = ('id', 'name', 'director',)
-    search_fields = ('name', 'genre', 'director',)
-    list_filter = ('name', 'genre', 'director', 'country',)
+class MovieAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'genre', 'release_date', 'directors', 'budget', 'box_office', 'country')
+    list_display_links = ('id', 'title', 'directors',)
+    search_fields = ('title', 'genre', 'directors',)
+    list_filter = ('title', 'genre', 'country',)
 
 
-class ActorAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'gender', 'birthday', 'citizenship', 'film_count')
-    list_display_links = ('id','name', 'citizenship',)
-    search_fields = ('name',)
-    list_filter = ('name', 'gender', 'citizenship',)
-
-
-class DirectorAdmin(admin.ModelAdmin):
+class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
     list_display_links = ('id',)
     search_fields = ('name',)
     list_filter = ('name',)
 
 
-class OperatorAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
-    list_display_links = ('id',)
+class PrimaryCastAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'role', 'gender', 'birthday', 'citizenship', 'film_count')
+    list_display_links = ('id', 'name', 'citizenship',)
     search_fields = ('name',)
-    list_filter = ('name',)
+    list_filter = ('role', 'gender', 'citizenship',)
 
 
-class ScriptWriterAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
-    list_display_links = ('id',)
-    search_fields = ('name',)
-    list_filter = ('name',)
-
-
-class ComposerAdmin(admin.ModelAdmin):
+class SecondaryCastAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
     list_display_links = ('id',)
     search_fields = ('name',)
@@ -66,10 +52,10 @@ class CriticAdmin(admin.ModelAdmin):
 
 
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('id', 'critic', 'text')
-    list_display_links = ('id', 'critic', )
-    search_fields = ('critic',)
-    list_filter = ('critic', )
+    list_display = ('id', 'critic', 'text', 'movie')
+    list_display_links = ('id', 'critic', 'movie', )
+    search_fields = ('critic', 'text', 'movie', )
+    list_filter = ('critic', 'movie', )
 
 
 class CommentAdmin(admin.ModelAdmin):
@@ -79,14 +65,15 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ('author', )
 
 
-admin.site.register(Movie, MovieAadmin)
-admin.site.register(Actor, ActorAdmin)
-admin.site.register(Director, DirectorAdmin)
-admin.site.register(Operator, OperatorAdmin)
-admin.site.register(ScriptWriter, ScriptWriterAdmin)
-admin.site.register(Composer, ComposerAdmin)
+admin.site.register(Movie, MovieAdmin)
+admin.site.register(Category, CategoryAdmin)
+
+admin.site.register(PrimaryCast, PrimaryCastAdmin)
+admin.site.register(SecondaryCast, SecondaryCastAdmin)
+
 admin.site.register(MovieShot, MovieShotAdmin)
 admin.site.register(Award, AwardAdmin)
+
 admin.site.register(Critic, CriticAdmin)
 admin.site.register(Review, ReviewAdmin)
 admin.site.register(Comment, CommentAdmin)

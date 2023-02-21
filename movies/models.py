@@ -3,8 +3,8 @@ from datetime import date
 from django.contrib.auth.models import User
 from django.db import models
 
-from movies.utils import GENRES, COUNTRIES, GENDER, PRIMARY_ROLES, SECONDARY_ROLES
-
+from movies.utils import GENRES, GENDER, PRIMARY_ROLES, SECONDARY_ROLES
+from django_countries.fields import CountryField
 
 class Movie(models.Model):
     """ Movie """
@@ -31,7 +31,9 @@ class Movie(models.Model):
     tagline = models.CharField(max_length=50, blank=True, null=True, verbose_name="Tagline")
     summary = models.TextField(max_length=2000, verbose_name="Summary")
     studio = models.CharField(max_length=100, blank=True, null=True, verbose_name="Studio")
-    country = models.CharField(max_length=50, choices=COUNTRIES, verbose_name="Country")
+
+    country = CountryField(multiple=True, verbose_name="Country")   # совместное производство
+    # country = models.CharField(max_length=50, choices=COUNTRIES, verbose_name="Country")
 
     def __str__(self):
         return self.title
@@ -68,7 +70,8 @@ class PrimaryCast(models.Model):
     name = models.CharField(max_length=100, verbose_name="Actor"),
     gender = models.CharField(max_length=10, choices=GENDER, verbose_name="Gender")
     birthday = models.DateField(verbose_name="Born")   # datetime.now().date - birthday
-    citizenship = models.CharField(max_length=50, blank=True, null=True, choices=COUNTRIES, verbose_name="Country")
+    citizenship = CountryField(multiple=True, verbose_name="Country")
+    # citizenship = models.CharField(max_length=50, blank=True, null=True, choices=COUNTRIES, verbose_name="Country")
     # age = models.IntegerField(verbose_name="Age")
     photo = models.ImageField(upload_to="static/actors_and_directors/", blank=True, null=True, verbose_name="Photo")
     bio = models.TextField(max_length=1000, blank=True, null=True, verbose_name="Bio")
@@ -91,7 +94,8 @@ class SecondaryCast(models.Model):
     role = models.CharField(max_length=50, choices=SECONDARY_ROLES, verbose_name="Role")
     name = models.CharField(max_length=50, verbose_name="Director")
     gender = models.CharField(max_length=10, choices=GENDER, verbose_name="Gender")
-    citizenship = models.CharField(max_length=50, blank=True, null=True, choices=COUNTRIES, verbose_name="Country")
+    citizenship = CountryField(multiple=True, verbose_name="Country")
+    # citizenship = models.CharField(max_length=50, blank=True, null=True, choices=COUNTRIES, verbose_name="Country")
 
     def __str__(self):
         return f"{self.name}({self.role})"

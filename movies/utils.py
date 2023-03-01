@@ -9,10 +9,6 @@ GENDER = (
     ('Female', 'female')
 )
 
-COUNTRIES = (
-
-)
-
 
 PRIMARY_ROLES = (
     ('Actor', 'actor'),

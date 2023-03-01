@@ -6,6 +6,7 @@ from django.db import models
 from movies.utils import GENRES, GENDER, PRIMARY_ROLES, SECONDARY_ROLES
 from django_countries.fields import CountryField
 
+
 class Movie(models.Model):
     """ Movie """
 

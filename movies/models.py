@@ -42,6 +42,12 @@ class Movie(models.Model):
     def directors(self):
         return "\n".join([d.name + ',' for d in self.director.all()])
 
+    def total_reviews(self):
+        return self.reviews.all().count()
+
+    def total_comments(self):
+        return self.comments.all().count()
+
     class Meta:
         verbose_name = 'Movie'
         verbose_name_plural = 'Movies'
@@ -150,63 +156,4 @@ class Critic(models.Model):
         verbose_name = 'Critic'
         verbose_name_plural = 'Critics'
         ordering = ['name']
-
-
-class Review(models.Model):
-    """ Reviews by professional Cinema Critics """
-
-    text = models.TextField(max_length=3000, verbose_name="Review")
-    critic = models.ForeignKey('Critic', on_delete=models.SET_NULL, null=True, verbose_name="Critic")
-    movie = models.ForeignKey('Movie', on_delete=models.CASCADE, verbose_name="Movie")
-
-    def __str__(self):
-        return f"{self.critic} about {self.movie}"
-
-    class Meta:
-        verbose_name = 'Review'
-        verbose_name_plural = 'Reviews'
-        ordering = ['-id']
-
-
-class Comment(models.Model):
-    """ Comments by ordinary users """
-
-    text = models.TextField(max_length=1000, verbose_name="Comment")
-    author = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name="Author")
-
-    def __str__(self):
-        return self.text
-
-    class Meta:
-        verbose_name = 'Comment'
-        verbose_name_plural = 'Comments'
-        ordering = ['-id']
-
-
-class RatingStar(models.Model):
-    """ Stars of Rating """
-
-    value = models.PositiveSmallIntegerField(default=0, verbose_name="Star")
-
-    def __str__(self):
-        return self.value
-
-    class Meta:
-        verbose_name = "Rating Star"
-        verbose_name_plural = "Rating Stars"
-
-
-class Rating(models.Model):
-    """ Rating """
-
-    ip = models.CharField(max_length=15)
-    star = models.ForeignKey('RatingStar', on_delete=models.CASCADE, verbose_name="Star")
-    movie = models.ForeignKey('Movie', on_delete=models.CASCADE, verbose_name="Movie")
-
-    def __str__(self):
-        return f"{self.value} stars for {self.movie}"
-
-    class Meta:
-        verbose_name = "Rating"
-        verbose_name_plural = "Ratings"
 

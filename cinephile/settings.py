@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -28,8 +29,10 @@ INSTALLED_APPS = [
     'movies',
     'movies_api',
     'feedback',
+    'my_auth',
 
     'rest_framework',
+    'rest_framework_simplejwt',
     'drf_yasg',
 
     'psycopg2',
@@ -116,10 +119,14 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# brauchst?
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS':
         'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 5,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }
 
 LANGUAGE_CODE = 'en-us'
@@ -139,4 +146,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# AUTH_USER_MODEL = 'my_auth.CustomUser'
+AUTH_USER_MODEL = 'my_auth.CustomUser'
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
+}

@@ -17,7 +17,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class PrimaryCastAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'role', 'gender', 'birthday', 'citizenship', 'film_count')
+    list_display = ('id', 'name', 'role', 'gender', 'birthday', 'citizenship', 'total_films')
     list_display_links = ('id', 'name', 'citizenship',)
     search_fields = ('name',)
     list_filter = ('role', 'gender', 'citizenship',)

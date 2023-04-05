@@ -8,6 +8,7 @@ from .serializers import *
 
 
 class AuthUserAPIView(GenericAPIView):
+    """ Get authenticated user """
 
     permission_classes = (permissions.IsAuthenticated,)
 

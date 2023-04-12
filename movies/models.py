@@ -8,6 +8,8 @@ from django.db import models
 from django.db.models import Q
 
 # from feedback.models import Comment
+from embed_video.fields import EmbedVideoField
+
 from movies.utils import GENRES, GENDER, PRIMARY_ROLES, SECONDARY_ROLES
 from django_countries.fields import CountryField
 
@@ -46,6 +48,7 @@ class Movie(models.Model):
     summary = models.TextField(max_length=2000, verbose_name="Summary")
     studio = models.CharField(max_length=100, blank=True, null=True, verbose_name="Studio")
 
+    trailer = EmbedVideoField(blank=True, null=True, verbose_name='Trailer')
     country = CountryField(multiple=True, verbose_name="Country")   # совместное производство
     # country = models.CharField(max_length=50, choices=COUNTRIES, verbose_name="Country")
 

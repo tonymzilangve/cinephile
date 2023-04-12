@@ -1,8 +1,10 @@
 from django.contrib import admin
+from embed_video.admin import AdminVideoMixin
+
 from .models import *
 
 
-class MovieAdmin(admin.ModelAdmin):
+class MovieAdmin(AdminVideoMixin, admin.ModelAdmin):
     list_display = ('id', 'title', 'genre', 'release_date', 'directors', 'budget', 'box_office', 'country')
     list_display_links = ('id', 'title', 'directors',)
     search_fields = ('title', 'genre', 'directors',)

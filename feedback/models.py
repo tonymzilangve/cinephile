@@ -6,15 +6,23 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from movies.models import Movie, Critic
+from movies.utils import REVIEW_TONE
 from my_auth.models import CustomUser
 
 
 class Review(models.Model):
-    """ Reviews by professional Cinema Critics """
+    """ Reviews by professional cinema critics """
 
-    text = models.TextField(max_length=3000, verbose_name="Review")
-    critic = models.ForeignKey(Critic, on_delete=models.SET_NULL, null=True, verbose_name="Critic")
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='reviews', verbose_name="Movie")
+    text = models.TextField(max_length=3000, verbose_name='Review')
+    tone = models.CharField(max_length=100, choices=REVIEW_TONE, default=REVIEW_TONE[0][0], verbose_name='Tone')
+    critic = models.ForeignKey(
+        Critic,
+        on_delete=models.SET_NULL,
+        related_name='reviews',
+        null=True,
+        verbose_name="Critic"
+    )
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='reviews', verbose_name='Movie')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

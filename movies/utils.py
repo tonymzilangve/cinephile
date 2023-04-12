@@ -21,3 +21,9 @@ SECONDARY_ROLES = (
     ('Operator', 'operator'),
     ('Composer', 'composer'),
 )
+
+REVIEW_TONE = (
+    ('Positive', 'positive'),
+    ('Neutral', 'neutral'),
+    ('Negative', 'negative'),
+)

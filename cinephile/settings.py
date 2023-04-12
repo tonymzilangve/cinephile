@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 
-    'django_countries'
+    'django_countries',
+    'embed_video'
 ]
 
 SITE_ID = 2

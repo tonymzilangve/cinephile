@@ -33,6 +33,7 @@ class Review(models.Model):
     def __str__(self):
         return f"{self.critic} about {self.movie}"
 
+    # @property
     def total_comments(self):
         return self.comments.all().count()
 
@@ -71,7 +72,7 @@ class RatingStar(models.Model):
     value = models.PositiveSmallIntegerField(default=0, verbose_name="Star")
 
     def __str__(self):
-        return self.value
+        return f'{self.value}'
 
     class Meta:
         verbose_name = "Rating Star"

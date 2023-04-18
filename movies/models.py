@@ -28,7 +28,8 @@ class Movie(models.Model):
     genre = models.CharField(max_length=30, blank=True, null=True, choices=GENRES, verbose_name="Genre")   # multiple!
     category = models.ForeignKey('Category', blank=True, null=True, on_delete=models.SET_NULL, verbose_name="Cat")
     release_date = models.DateField(default=date.today, verbose_name="Premier")
-    duration = models.DurationField()  # IntegerField
+    duration = models.DurationField(blank=True, null=True)  # IntegerField
+    # come scrivere este formato?
 
     actors = models.ManyToManyField('PrimaryCast', related_name="film_actor", verbose_name="Actors")
     director = models.ManyToManyField('PrimaryCast', related_name="film_director", verbose_name="Director")
@@ -49,7 +50,7 @@ class Movie(models.Model):
     studio = models.CharField(max_length=100, blank=True, null=True, verbose_name="Studio")
 
     trailer = EmbedVideoField(blank=True, null=True, verbose_name='Trailer')
-    country = CountryField(multiple=True, verbose_name="Country")   # совместное производство
+    country = CountryField(multiple=True, blank=True, verbose_name="Country")   # совместное производство
     # country = models.CharField(max_length=50, choices=COUNTRIES, verbose_name="Country")
 
     # comments = fields.GenericRelation(Comment)
